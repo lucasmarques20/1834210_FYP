@@ -72,9 +72,9 @@ const Login = () => {
                   <LoginContainer>
                       <Title> LOGIN </Title>
                     <Input placeholder='Email'/>
-                    <Input placeholder='Password'/>
+                    <Input placeholder='Password' type="password"/>
                     <Help> NEED HELP? PLEASE CONTACT OUR SUPPORT BELOW </Help>
-                    <Button> CONTINUE </Button>
+                    <Button> SUBMIT </Button>
                   </LoginContainer>
                 </Container2>
             <Questions/>

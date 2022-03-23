@@ -23,6 +23,7 @@ const Description = styled.div`
 const Email = styled.a`
     font-size: 20px;
     font-weight: 400;
+    border-bottom: 1px solid black;
 `
 
 const QuestionsProductPage = () => {

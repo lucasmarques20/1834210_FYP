@@ -1,4 +1,5 @@
 import { AddCircleOutlined, RemoveCircleOutlined } from '@material-ui/icons'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import Footer from '../components/Footer'
 import NavigationBar from '../components/NavigationBar'
@@ -42,9 +43,6 @@ const Buttons = styled.button`
     
     transition: all 0.2s ease;
 `
-
-// const Texts = styled.div`
-// `
 
 const ShoppingCartTitle = styled.div`
     text-decoration: underline;
@@ -176,10 +174,9 @@ const ShoppingCart = () => {
                 YOUR CART
             </Title>
             <Top>
+                <Link to = {`/allproducts`}>
                 <Buttons> CONTINUE SHOPPING </Buttons>
-                {/* <Texts>
-                    <ShoppingCartTitle> Shopping Cart(1)</ShoppingCartTitle>
-                </Texts> */}
+                </Link>
             </Top>
             <Bot>
                 <Information>

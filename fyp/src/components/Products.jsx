@@ -1,3 +1,4 @@
+import { useEffect } from "react/cjs/react.production.min";
 import styled from "styled-components";
 import { Merchproducts } from "../sliderdata";
 import { Surridgeproducts } from "../sliderdata";
@@ -13,8 +14,15 @@ const Container = styled.div`
     background-color: #f7f7f7;
 `
 
-export const Prodcuts = () => {
-  return <Container>
+export const Products = ({categories, filters, sort}) => {
+    // const [products, setProducts] = useState([])
+    // const [filteredProducts, setFilteredProducts] = useState([])
+
+    // useEffect(() => {
+
+    // }, [categories])
+    
+return <Container>
       {Merchproducts.map(item => (
           <SingleProduct item = {item} key = {item.id}/>
       ))}
@@ -25,5 +33,5 @@ export const Prodcuts = () => {
   </Container>;
 }
 
-export default Prodcuts;
+export default Products;
 

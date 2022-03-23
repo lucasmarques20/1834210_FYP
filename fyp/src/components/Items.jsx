@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import styled from "styled-components"
 
 const Container = styled.div`
@@ -48,11 +49,12 @@ const Items = ({item}) => {
   return <Container>
       <ImageContainer>
       <Image src = {item.img}/>
+      <Link to = {`/allproducts`}>
           <Button>
               VIEW PRODUCTS
           </Button>
+          </Link>
         </ImageContainer>
-
   </Container>;
 };
 

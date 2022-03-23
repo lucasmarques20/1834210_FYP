@@ -54,6 +54,8 @@ const Button = styled.button`
 `
 
 const SignUp = () => {
+
+  
   return (
         <Container>
           <NavigationBar/>
@@ -62,10 +64,10 @@ const SignUp = () => {
                 <Title> SIGN UP </Title>
                   <Input placeholder='First Name'/>
                   <Input placeholder='Last Name'/>
-                  <Input placeholder='Email'/>
-                  <Input placeholder='Password'/>
-                  <Input placeholder='Confirm Password'/>
-                  <Button> CREATE </Button>
+                  <Input placeholder='Email' type="email"/>
+                  <Input placeholder='Password' type="password"/>
+                  <Input placeholder='Confirm Password' type="password"/>
+                  <Button> SUBMIT </Button>
               </SignUpContainer>
               </Container2>
           <Questions/>

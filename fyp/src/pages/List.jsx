@@ -4,6 +4,8 @@ import NavigationBar from "../components/NavigationBar";
 import Products from "../components/Products";
 import QuestionsProductPage from '../components/QuestionsProductPage';
 import FooterProductPage from '../components/FooterProductPage';
+import { useLocation } from 'react-router-dom';
+import { useState } from 'react'; 
 
 const Container = styled.div`
 `
@@ -48,6 +50,21 @@ const SelectOption = styled.option`
 `
 
 const List = () => {
+    const location = useLocation();
+    const categories = location.pathname.split("/")[2]
+    const [filters, setFilters] = useState({})
+    const [sort, setSort] = useState("all")
+
+    const handleFilters = (event) => {
+
+        const value = event.target.value;
+        setFilters({
+            ...filters,
+            [event.target.name]:value,
+        });
+    };
+
+
   return (
         <Container>
             <NavigationBar/>
@@ -57,23 +74,21 @@ const List = () => {
             </Title>
             <FilterContainer>
             <Filter><FilterText> Gender: </FilterText></Filter>
-            <Select>
-                <SelectOption disabled selected>
+            <Select name = "gender" onChange={handleFilters}>
+                <SelectOption>
                      All 
                 </SelectOption>
                 <SelectOption> Male </SelectOption>
                 <SelectOption> Female </SelectOption>
             </Select>
             <Filter><FilterText> Category: </FilterText></Filter>
-            <Select>
-                <SelectOption disabled selected>
-                     All 
-                </SelectOption>
-                <SelectOption> Merch </SelectOption>
-                <SelectOption> Sportswear </SelectOption>
+            <Select onChange={(event) => setSort(event.target.value)}>
+                <SelectOption value ="all"> All </SelectOption>
+                <SelectOption value ="merch"> Merch </SelectOption>
+                <SelectOption value ="sportswear"> Sportswear </SelectOption>
             </Select>
             </FilterContainer>
-            <Products/>
+            <Products categories = {categories} filters = {filters} sort={sort}/>
             </Container2>
             <QuestionsProductPage/>
             <FooterProductPage/>

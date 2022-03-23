@@ -1,6 +1,7 @@
 import {Badge} from "@material-ui/core";
 import {Search, ShoppingCartOutlined} from "@material-ui/icons";
 import React from 'react';
+import { Link } from "react-router-dom";
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -21,7 +22,8 @@ align-items: center;
 `;
 
 const Language = styled.span`
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: 500;
 `;
 
 const SearchContainer = styled.div`
@@ -51,10 +53,18 @@ flex: 1;
 display: flex;
 align-items: center;
 justify-content: flex-end;
-`;
+a
+{
+    color: black;
+    text-decoration-color: black;
+    outline: none;
+    text-decoration: none;
+}
+`
 
 const MenuItem = styled.div`
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: 500;
   cursor: pointer;
   margin-left: 25px;
 `
@@ -69,16 +79,23 @@ const NavigationBar = () => {
                     <Search style={{color:"gray", fontSize:16}}/>
                   </SearchContainer>
                 </Left>
+                <Link to = {`/`}>
                 <Center>
                   <Image src = "https://brunelstudents.com/stylesheet/UrbanDesign/union-brand.svg" />
                 </Center>
+                </Link>
                 <Right>
-                  
-                  <MenuItem>SIGN UP</MenuItem>
-                  <MenuItem>LOGIN</MenuItem>
+                  <Link to = {`/signup`}>
+                    <MenuItem>SIGN UP</MenuItem>
+                  </Link>
+                  <Link to = {`/login`}>
+                    <MenuItem>LOGIN</MenuItem>
+                  </Link>
                   <MenuItem>
-                    <Badge badgeContent={1} color = "primary"> 
+                    <Badge badgeContent={0} color = "primary"> 
+                    <Link to = {`/shoppingcart`}>
                     <ShoppingCartOutlined />
+                    </Link>
                     </Badge>
                   </MenuItem>
                 </Right>

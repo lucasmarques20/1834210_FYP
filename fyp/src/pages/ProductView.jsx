@@ -147,14 +147,15 @@ const ProductView = () => {
                     <Filter>
                         <Name>Size</Name>
                         <Size> 
-                           <Option> 8 </Option> 
-                           <Option> 10 </Option> 
-                           <Option> 12 </Option> 
-                           <Option> 14 </Option> 
-                           <Option> 16 </Option> 
-                           <Option> L </Option> 
-                           <Option> XL </Option> 
-                           <Option> XXL </Option> 
+                           <Option> Small Junior </Option> 
+                           <Option> Medium Junior </Option> 
+                           <Option> Large Junior </Option> 
+                           <Option> Youth </Option> 
+                           <Option> Small </Option> 
+                           <Option> Medium </Option> 
+                           <Option> Large </Option> 
+                           <Option> X Large </Option> 
+                           <Option> XX Large </Option> 
                         </Size>
                     </Filter>
                 </FilterContainer>

@@ -1,4 +1,5 @@
 import { Facebook, Instagram, LocationOn, Phone, Twitter } from "@material-ui/icons"
+import { Link } from "react-router-dom"
 import styled from "styled-components"
 
 const Container = styled.div`
@@ -33,15 +34,32 @@ const Title1 = styled.h1`
     justify-content: center;
     font-size: 40px;
 `
+const IconsContainer = styled.div`
+    margin-top: 20px;
+`
 
 const SocialContainer = styled.div`
     display: flex;
     color: white;
     width: 200px;
-    margin-top: 60px;
-    margin-left: 130px;
-    justify-content: space-between;
-    align-items: center;
+    margin-top: 0px;
+    margin-left: 120px;
+    margin-bottom: 10px;
+    justify-content: center;
+    align-items: center; 
+    text-indent: 10px;
+    
+    a
+{
+    color: white;
+    text-decoration-color: white;
+    outline: none;
+    text-decoration: none;
+}
+
+&:hover{
+    text-decoration: underline;
+}
 `
 
 const Right = styled.div`
@@ -78,13 +96,38 @@ const Footer = () => {
         </Left>
         <Center>
             <Title1> Our Socials </Title1>
-            <SocialContainer>
+                <IconsContainer>
+                    <SocialContainer>
                     <Instagram/>
+                    <a href="https://www.instagram.com/brunelstudents/">
+                    brunelstudents
+                    </a>
+                    </SocialContainer>
+                    <SocialContainer>
                     <Facebook/>
+                    <a href="https://www.facebook.com/Brunelstudents/">
+                    brunelstudents
+                    </a>
+                    </SocialContainer>
+                    <SocialContainer>
                     <Instagram/>
+                    <a href="https://www.instagram.com/ubsnightlife/">
+                    brunelnightlife
+                    </a>
+                    </SocialContainer>
+                    <SocialContainer>
                     <Twitter/>
+                    <a href="https://twitter.com/brunelstudents">
+                    brunelstudents
+                    </a>
+                    </SocialContainer>
+                    <SocialContainer>
                     <Facebook/>
-            </SocialContainer>
+                    <a href="https://www.facebook.com/Brunelstudents/">
+                    brunelnightlife
+                    </a>
+                    </SocialContainer>
+                    </IconsContainer>
         </Center>
         <Right>
             <Title2> Contact Us </Title2>
