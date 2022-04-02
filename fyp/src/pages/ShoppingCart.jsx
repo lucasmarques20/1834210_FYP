@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import Footer from '../components/Footer'
 import NavigationBar from '../components/NavigationBar'
 import Questions from '../components/Questions'
-
+import { useState } from 'react';
 
 const Container = styled.div `
 `
@@ -44,11 +44,11 @@ const Buttons = styled.button`
     transition: all 0.2s ease;
 `
 
-const ShoppingCartTitle = styled.div`
-    text-decoration: underline;
-    cursor: pointer;
-    margin: 0px 10px;
-`
+// const ShoppingCartTitle = styled.div`
+//     text-decoration: underline;
+//     cursor: pointer;
+//     margin: 0px 10px;
+// `
 
 const Bot = styled.div`
     display: flex;
@@ -164,7 +164,20 @@ const CashoutButton = styled.button`
     transition: all 0.2s ease;
 `
 
+
 const ShoppingCart = () => {
+
+    const [quantity, setQuantity] = useState(1)
+
+    const handleQuantity = (type) => {
+        if (type === "remove") {
+           quantity > 1 && setQuantity(quantity - 1)
+        }
+        else {
+            setQuantity(quantity + 1)
+        }
+    }
+
   return (
     <Container>
         <NavigationBar/>
@@ -190,9 +203,9 @@ const ShoppingCart = () => {
                     </ProductInformation>
                     <PriceDetails>
                         <InformationContainer>
-                            <AddCircleOutlined/>
-                            <Amount>1</Amount>
-                            <RemoveCircleOutlined/>
+                            <RemoveCircleOutlined cursor = "pointer" onClick = {() => handleQuantity("remove")}/>
+                            <Amount>{quantity}</Amount>
+                            <AddCircleOutlined cursor = "pointer" onClick = {() => handleQuantity("add")}/>
                         </InformationContainer>
                         <Price> £0.00 </Price>
                     </PriceDetails>

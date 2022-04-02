@@ -1,9 +1,13 @@
 import { AddCircleOutlined, RemoveCircleOutlined } from '@material-ui/icons'
+import axios from 'axios';
 import React from 'react'
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components'
 import Footer from '../components/Footer'
 import NavigationBar from '../components/NavigationBar'
 import Questions from '../components/Questions'
+// import { request } from '../requests'
 
 const Container = styled.div``
 
@@ -44,7 +48,7 @@ const Description = styled.p`
 `
 
 const Price = styled.span`
-    font-size: 30px;
+    font-size: 40px;
     font-weight: 200;
 `
 
@@ -123,6 +127,50 @@ const Button = styled.button`
 `
 
 const ProductView = () => {
+
+    const location = useLocation();
+    const id = location.pathname.split("/")[2];
+    
+    const [product, setProduct] = useState({})
+    const [quantity, setQuantity] = useState(1)
+
+    useEffect(() => {
+        const getProduct = async () => {
+        try{
+            const res = await axios.get ("http://localhost:5000/api/products/find/"+id ); 
+            setProduct(res.data); 
+            console.log(res)
+        } catch (err) {
+            console.log(err)
+        }
+    }
+        getProduct()
+        // console.log(id)
+        // console.log(location)
+    }, [id]);
+
+    const handleQuantity = (type) => {
+        if (type === "remove") 
+        {
+           quantity > 1 && setQuantity(quantity - 1)
+        }
+        else 
+        {
+            setQuantity(quantity + 1)
+        }
+    }
+
+    function handleFilter() {
+
+        if (product.id > 13) {
+            return null;
+        }
+        else {
+            return (<Filter/>)
+        }
+    }
+    console.log(product.id)
+
   return (
     <Container>
         <NavigationBar/>
@@ -130,20 +178,20 @@ const ProductView = () => {
 
         <Wrapper>
             <ImageContainer>
-                <Image src = "https://www.surridgesport.com/content/images/thumbs/0111110_brunel-university-dual-gym-shirt.jpeg"/>
+                <Image src = {product.img}/>
             </ImageContainer>
             <InformationContainer>
                 <Title>
-                    BRUNEL UNIVERSITY DUAL GYM SHIRT
+                    {product.title}
                 </Title>
                 <Description>
-                Brunel University Dual Gym Shirt with Team Brunel left chest, SS logo printed right chest in white, 
-                Bespoke yellow dual print to shoulders, option of sport name printed to reverse in white and option of initials printed above SS in white.
+                    {product.description}
                 </Description>
                 <Price>
-                    £18.15
+                    £{product.price}
                 </Price>
-                <FilterContainer>
+                <FilterContainer onLoad={handleFilter()} > 
+                    {/* "onLoad" event above not working */}
                     <Filter>
                         <Name>Size</Name>
                         <Size> 
@@ -156,6 +204,8 @@ const ProductView = () => {
                            <Option> Large </Option> 
                            <Option> X Large </Option> 
                            <Option> XX Large </Option> 
+                           {/* Sizes are only supposed to be displayed to Sportswear products
+                           and not Merch products (problem I could not fix)*/}
                         </Size>
                     </Filter>
                 </FilterContainer>
@@ -166,11 +216,11 @@ const ProductView = () => {
 
                 <AmountContainer>
                     <ButtonsContainer>
-                        <RemoveCircleOutlined/>
+                        <RemoveCircleOutlined cursor = "pointer" onClick = {() => handleQuantity("remove")} />
                             <Amount>
-                                1
+                                {quantity}
                             </Amount>
-                        <AddCircleOutlined/>
+                        <AddCircleOutlined cursor = "pointer" onClick = {() => handleQuantity("add")}/>
                     </ButtonsContainer>
                     <Button>ADD TO CART</Button>
                 </AmountContainer>

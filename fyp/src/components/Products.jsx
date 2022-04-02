@@ -1,8 +1,8 @@
-import { useEffect } from "react/cjs/react.production.min";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Merchproducts } from "../sliderdata";
-import { Surridgeproducts } from "../sliderdata";
+// import { AllProducts } from "../sliderdata"; // old local database 
 import SingleProduct from "./SingleProduct";
+import axios from "axios";
 
 const Container = styled.div`
     padding: 20px;
@@ -14,23 +14,39 @@ const Container = styled.div`
     background-color: #f7f7f7;
 `
 
-export const Products = ({categories, filters, sort}) => {
-    // const [products, setProducts] = useState([])
-    // const [filteredProducts, setFilteredProducts] = useState([])
-
-    // useEffect(() => {
-
-    // }, [categories])
+const Products = ({categories, filters}) => {
     
-return <Container>
-      {Merchproducts.map(item => (
-          <SingleProduct item = {item} key = {item.id}/>
-      ))}
-      {Surridgeproducts.map(item => (
-            <SingleProduct item = {item} key = {item.id}/>
-      ))}
+    const [products, setProducts] = useState([])
+    const [filteredProducts, setFilteredProducts] = useState([])
 
-  </Container>;
+    useEffect(() => {
+        const getProducts = async () => {
+            try{
+                const res = await axios.get
+                (`http://localhost:5000/api/products?categories=${categories}`); 
+
+                setProducts(res.data);
+                console.log(res)
+            }
+            catch (err) {}    
+        }
+        getProducts()
+    }, [categories])
+    
+    // Filter Products
+    useEffect(()=> {
+        categories && setFilteredProducts(products.filter((item) => 
+        Object.entries(filters).every(([key, value]) => item[key].includes(value)))) 
+    },[products, categories, filters])
+    
+    return (
+    <Container>
+      {filteredProducts.map(item => 
+      ( <SingleProduct item = {item} key = {item.id}/>
+      ))}
+      
+  </Container>
+  );
 }
 
 export default Products;

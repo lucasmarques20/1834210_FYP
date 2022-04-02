@@ -49,7 +49,7 @@ const Items = ({item}) => {
   return <Container>
       <ImageContainer>
       <Image src = {item.img}/>
-      <Link to = {`/allproducts`}>
+      <Link to = {`/products`}>
           <Button>
               VIEW PRODUCTS
           </Button>

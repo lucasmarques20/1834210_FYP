@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import Questions from '../components/Questions'
 import NavigationBar from '../components/NavigationBar'
+import axios from 'axios'
+import { useState } from 'react';
 
 const Container = styled.div `
 `
@@ -27,11 +29,6 @@ display: flex;
 flex-direction: column;
 width: 30%;
 `;
-
-const Image = styled.img`
-margin-top: 50px;
-width: 85px;
-`
 
 const Title = styled.h1`
 font-size: 40px;
@@ -64,20 +61,41 @@ const Button = styled.button`
     transition: all 0.2s ease;
 `
 
-const Login = () => {
+const Login = () => { 
+  
+  // Could not get the information to be sent to the mongoDB server, 
+  //but users can be fecthed and created using Postman, the app I relied on to test the API.
+
+  const [user, setUser] = useState(null)
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try{
+      const res = await axios.get ("http://localhost:5000/api/login", {email, password})
+      setUser(res.data)
+
+    } catch (err) {
+      console.log(err)
+    }
+  }
     return (
           <Container>
               <NavigationBar/>
               <Container2>
                   <LoginContainer>
+                    <form onSubmit={handleSubmit}>
                       <Title> LOGIN </Title>
-                    <Input placeholder='Email'/>
-                    <Input placeholder='Password' type="password"/>
+                    <Input type="email" placeholder='Email' onChange={(event) => setEmail (event.target.value)} required/>
+                    <Input type="password" placeholder='Password' onChange={(event) => setPassword (event.target.value)} required/>
                     <Help> NEED HELP? PLEASE CONTACT OUR SUPPORT BELOW </Help>
-                    <Button> SUBMIT </Button>
+                    <Button type = "submit" className='submitButton'> SUBMIT </Button>
+                    </form>
                   </LoginContainer>
                 </Container2>
             <Questions/>
+            
           </Container>
     )
   }

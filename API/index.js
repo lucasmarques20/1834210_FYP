@@ -6,11 +6,13 @@ const userRoute = require ("./routes/user")
 const authenticationRoute = require ("./routes/authentication")
 const productsRoute = require ("./routes/products")
 const shoppingCartRoute = require ("./routes/shoppingcart")
-
+const cors = require("cors")
 dotenv.config();
 
 mongoose.connect (process.env.URL)
 .then(()=>console.log("Connection Successful")).catch((err)=>{console.log(err)});
+
+app.use (cors({origin: "http://localhost:3000"})) // Client can now run on a different domain
 
 app.use(express.json());
 app.use("/api/authentication", authenticationRoute);

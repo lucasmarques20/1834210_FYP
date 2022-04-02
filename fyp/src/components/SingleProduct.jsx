@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { SearchOutlined } from "@material-ui/icons";
 import styled from "styled-components";
 
@@ -73,11 +74,13 @@ export const SingleProduct = ({item}) => {
   return <Container>
       <Circle/>
           <Image src = {item.img}/>
-          <Info>
+          <Link to = {`/product/${item._id}`}>
+            <Info>
               <Icon>
                 <SearchOutlined/>
               </Icon>
-          </Info>
+            </Info>
+          </Link>
   </Container>
 }
 

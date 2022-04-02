@@ -1,4 +1,4 @@
-const router = require("express").Router();
+const router = require("express").Router();   
 const Products = require("../models/Products");
 
 // Adding New Products
@@ -66,7 +66,7 @@ router.get("/", async (req, res) => {
         // Fecthing Products
         if(newQuery) 
         {
-            products = await Products.find().sort({createdAt: -1}).limit(1)
+            products = await Products.find().sort({createdAt: -1}).limit(5)
         }
         else if (categoriesQuery) 
         {
@@ -76,7 +76,9 @@ router.get("/", async (req, res) => {
             },
         })
     }
-    else {products = await Products.find()}
+    else {
+        products = await Products.find()
+    }
 
     res.status(200).json(products)
 } catch (err) {

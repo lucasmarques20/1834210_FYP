@@ -4,7 +4,6 @@ import NavigationBar from "../components/NavigationBar";
 import Products from "../components/Products";
 import QuestionsProductPage from '../components/QuestionsProductPage';
 import FooterProductPage from '../components/FooterProductPage';
-import { useLocation } from 'react-router-dom';
 import { useState } from 'react'; 
 
 const Container = styled.div`
@@ -24,6 +23,7 @@ const Title = styled.h1`
 const FilterContainer = styled.div`
     display: flex;
     justify-content: space-between;
+    align-items: left;
     margin-bottom: 370px;
     margin-right: 35px;
     margin-left: 25px;
@@ -31,7 +31,7 @@ const FilterContainer = styled.div`
 `
 
 const Filter = styled.div`
-    margin: 10px; 
+    margin: 10px;
 `
 
 const FilterText = styled.span`
@@ -42,28 +42,26 @@ const FilterText = styled.span`
 const Select = styled.select`
 margin-left: -1000px;
 font-size: 16px;
-
 `
 
 const SelectOption = styled.option`
-
 `
 
 const List = () => {
-    const location = useLocation();
-    const categories = location.pathname.split("/")[2]
+    var categories = document.cookie.replace(/(?:(?:^|.*;\s*)filter\s*\=\s*([^;]*).*$)|^.*$/, "$1"); // Using cookie
     const [filters, setFilters] = useState({})
-    const [sort, setSort] = useState("all")
 
     const handleFilters = (event) => {
-
         const value = event.target.value;
+        categories = value;
+        console.log(categories)
         setFilters({
             ...filters,
             [event.target.name]:value,
         });
+        document.cookie = "filter="+value;
+        window.location.reload()
     };
-
 
   return (
         <Container>
@@ -73,22 +71,18 @@ const List = () => {
                 Our Products
             </Title>
             <FilterContainer>
-            <Filter><FilterText> Gender: </FilterText></Filter>
-            <Select name = "gender" onChange={handleFilters}>
-                <SelectOption>
-                     All 
-                </SelectOption>
-                <SelectOption> Male </SelectOption>
-                <SelectOption> Female </SelectOption>
-            </Select>
-            <Filter><FilterText> Category: </FilterText></Filter>
-            <Select onChange={(event) => setSort(event.target.value)}>
-                <SelectOption value ="all"> All </SelectOption>
-                <SelectOption value ="merch"> Merch </SelectOption>
-                <SelectOption value ="sportswear"> Sportswear </SelectOption>
+            <Filter><FilterText> Filters: </FilterText></Filter>
+            <Select name = "filter" onChange={handleFilters}>
+                <SelectOption> Choose Filter </SelectOption>
+                <SelectOption value="All"> All </SelectOption>
+                <SelectOption value="Male"> Male </SelectOption>
+                <SelectOption value="Female"> Female </SelectOption>
+                <SelectOption value="Merch"> Merch </SelectOption>
+                <SelectOption value="Sportswear"> Sportswear </SelectOption>
+
             </Select>
             </FilterContainer>
-            <Products categories = {categories} filters = {filters} sort={sort}/>
+            <Products categories = {categories} filters = {filters}/>
             </Container2>
             <QuestionsProductPage/>
             <FooterProductPage/>

@@ -5,7 +5,7 @@ import ProductView from "./pages/ProductView";
 import ShoppingCart from "./pages/ShoppingCart";
 import SignUp from "./pages/SignUp";
 
-import { BrowserRouter as Router, useNavigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 const App = () => {
 
@@ -14,9 +14,9 @@ const App = () => {
       <Routes>
         <Route path = "/" element = {<Home/>}>
         </Route>
-        <Route path = "/allproducts" element = {<List/>}> 
+        <Route path = "/products" element = {<List/>}> 
         </Route>
-        <Route path = "/allproducts/:id" element = {<ProductView/>}> 
+        <Route path = "/product/:id" element = {<ProductView/>}> 
         </Route>
         <Route path = "/login" element = {<Login/>}>
         </Route>
